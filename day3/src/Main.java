@@ -89,13 +89,20 @@ public class Main {
          */
 
         // #4. 시간복잡도 고려 O
-        Set<Integer> set = new HashSet<>();
+        Map<Integer, Integer> map = new HashMap<>();
         for(int i = 0; i<list.size() ; i++){
-            if(!set.contains(list.get(i))) set.add(list.get(i));
-            if(set.contains(target - list.get(i))){
-                answer[0] = list.get(i);
-                answer[1] = target - list.get(i);
-                break;
+            if(!map.containsKey(list.get(i))) map.put(list.get(i), i);
+            if(map.containsKey(target - list.get(i))){
+                if(map.get(list.get(i))>map.get(target - list.get(i))){
+                    answer[0] = target - list.get(i);
+                    answer[1] = list.get(i);
+                    break;
+                }
+                else{
+                    answer[0] = list.get(i);
+                    answer[1] = target - list.get(i);
+                    break;
+                }
             }
         }
         System.out.println(Arrays.toString(answer));
